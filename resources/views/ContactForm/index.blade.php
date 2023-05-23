@@ -4,7 +4,7 @@
 @foreach ($errors->all() as $error)
     <li> <span class="error">{{ $error }}</span></li>
 @endforeach
-<form action="/ContactForm/confirm" method="POST">
+<form action="{{route('contact.confirm')}}" method="POST">
     <div>
         <label for="name">お名前</label>
         <input type="text" name="name" id="name">

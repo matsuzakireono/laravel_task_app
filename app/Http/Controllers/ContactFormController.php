@@ -13,7 +13,7 @@ class ContactFormController extends Controller
     }
     public function confirm(Request $request)
     {
-        /* Request で送信された内容をデバッグ表示する */
+        // dd($request);
         // dd($request->all());
         /* バリデーションを実施する */
         $this->validate($request, [

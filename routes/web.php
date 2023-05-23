@@ -17,5 +17,10 @@ use App\Http\Controllers\ContactFormController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/ContactForm', [ContactFormController::class, 'index']);
-Route::post('/ContactForm/confirm', [ContactFormController::class, 'confirm']);
+Route::get('/ContactForm', [ContactFormController::class, 'index'])
+    ->name('contact.index');
+
+// name()名前付きルート
+//ルート情報見るコマンド　sail artisan route:list
+Route::post('/ContactForm/confirm', [ContactFormController::class, 'confirm'])
+    ->name('contact.confirm');
