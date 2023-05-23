@@ -19,8 +19,12 @@ Route::get('/', function () {
 });
 Route::get('/ContactForm', [ContactFormController::class, 'index'])
     ->name('contact.index');
+// Route::post('/ContactForm', [ContactFormController::class, 'index'])
+//     ->name('contact.index');
 
 // name()名前付きルート
 //ルート情報見るコマンド　sail artisan route:list
 Route::post('/ContactForm/confirm', [ContactFormController::class, 'confirm'])
     ->name('contact.confirm');
+// Route::post('/ContactForm', [ContactFormController::class, 'confirm'])
+//     ->name('contact.confirm');

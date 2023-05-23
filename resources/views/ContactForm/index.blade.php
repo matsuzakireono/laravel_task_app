@@ -7,7 +7,7 @@
 <form action="{{route('contact.confirm')}}" method="POST">
     <div>
         <label for="name">お名前</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" value="{{old('name')}}">
          {{-- @if ($errors->has('項目名')) でエラーがあるかを判定 --}}
          @if ($errors->has('name'))
          <p class="error">*{{ $errors->first('name') }}</p>
