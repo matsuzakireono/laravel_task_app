@@ -5,7 +5,7 @@
         お名前：
         <p>{{$request->name}}</p>
     </li>
-    <form action="" method="POST">
+   <!-- <form action="" method="POST">
         {{-- type="hidden" で、画面非表示の状態で入力内容を保持しておく --}}
         <input type="hidden" name="name" value="{{$request->name}}">
         <div>
@@ -13,6 +13,6 @@
             <input type="submit" name="back" value="戻る">
         </div>
         @csrf
-    </form>
-    {{-- <button type="button" onClick="history.back()">戻る</button> --}}
+    </form>-->
+    <button type="button" onClick="history.back()">戻る</button>
 </ul>

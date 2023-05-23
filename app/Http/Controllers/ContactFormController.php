@@ -21,10 +21,10 @@ class ContactFormController extends Controller
             'name' => ['required', 'min:2', 'max:100']
         ]);
 
-        if ($request->has('back')) {
-            /* withInput() で、現在の入力内容をリダイレクトのリクエストに付加する */
-            return redirect('/ContactForm')->withInput();
-        }
+        // if ($request->has('back')) {
+        //     /* withInput() で、現在の入力内容をリダイレクトのリクエストに付加する */
+        //     return redirect('/ContactForm')->withInput();
+        // }
 
         return view('ContactForm.confirm', compact('request'));
         /* 戻るボタンが押されたとき(リクエストに、back の内容がある)
