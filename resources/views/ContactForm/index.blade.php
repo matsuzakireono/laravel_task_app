@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/all.css')}}">
 <form action="{{ route('contact.confirm')}}" method="post">
     @csrf
     <div>
@@ -34,3 +36,5 @@
 {{$contact->name}}
 
 @endforeach
+
+

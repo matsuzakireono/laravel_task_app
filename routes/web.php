@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::post('/ContactForm/{id}}', [ContactFormController::class, 'update'])->nam
 Route::post('/ContactForm/{id}}/delete', [ContactFormController::class, 'delete'])->name('contact.delete');
 Route::post('/ContactForm/confirm', [ContactFormController::class, 'confirm'])->name('contact.confirm');
 Route::post('/ContactForm/complete', [ContactFormController::class, 'store'])->name('contact.store');
+
+Route::resource('books', BookController::class);

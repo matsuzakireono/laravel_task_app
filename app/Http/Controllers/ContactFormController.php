@@ -43,7 +43,6 @@ class ContactFormController extends Controller
     public function show($id)
     {
         $contact = Contact::find($id);
-        // dd($contact);
 
         return view('ContactForm.show', compact('contact'));
     }

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/all.css')}}">
 <ul>
     <li>{{$contact->name}}</li>
     <li>{{$contact->email}}</li>
