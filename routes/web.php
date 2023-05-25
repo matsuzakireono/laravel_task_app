@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactFormController;
-use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +14,18 @@ use App\Http\Controllers\BookController;
 |
 */
 
-//ルート情報見るコマンド　sail artisan route:list
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/ContactForm', [ContactFormController::class, 'index'])->name('contact.index');
-Route::get('/ContactForm/{id}}', [ContactFormController::class, 'show'])->name('contact.show');
-Route::get('/ContactForm/{id}}/edit', [ContactFormController::class, 'edit'])->name('contact.edit');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/ContactForm/{id}}', [ContactFormController::class, 'update'])->name('contact.update');
-Route::post('/ContactForm/{id}}/delete', [ContactFormController::class, 'delete'])->name('contact.delete');
-Route::post('/ContactForm/confirm', [ContactFormController::class, 'confirm'])->name('contact.confirm');
-Route::post('/ContactForm/complete', [ContactFormController::class, 'store'])->name('contact.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::resource('books', BookController::class);
+require __DIR__.'/auth.php';

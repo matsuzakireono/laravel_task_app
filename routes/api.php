@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/test/{id}', [TestAPIController::class, 'index']);
+Route::get('/test', [TestAPIController::class, 'getAllContacts']);

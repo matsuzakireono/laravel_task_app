@@ -11,5 +11,3 @@
 
 <a href="{{route('books.create')}}">登録画面へ</a>
 
-
-
