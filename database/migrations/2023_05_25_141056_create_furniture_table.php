@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('furniture', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('price');
+            $table->string('prefecture');
+            $table->string('address');
+            $table->string('image');
+            $table->double('review');
+            $table->boolean('is_visible');
             $table->timestamps();
         });
     }

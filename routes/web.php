@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\SampleController;
+use App\Http\Controllers\FurnitureController;
 
 
 Route::get('/sample', [SampleController::class, 'index'])->name('sample.index');
@@ -33,7 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
+    //ここから家具サイト
+    Route::resource('furnitures', FurnitureController::class);
 });
+// Route::resource('funitures', FurnitureController::class);
 
 require __DIR__ . '/auth.php';

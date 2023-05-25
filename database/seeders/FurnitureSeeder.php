@@ -1,9 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Furniture;
+use Faker\Factory as Faker;
+
 
 class FurnitureSeeder extends Seeder
 {
@@ -12,6 +14,7 @@ class FurnitureSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('furniture')->truncate();
+        Furniture::factory()->count(200)->create();
     }
 }
