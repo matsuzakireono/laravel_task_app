@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Furniture;
 use Illuminate\Http\Request;
+use App\Const\Prefecture;
 
 class FurnitureController extends Controller
 {
@@ -12,35 +13,10 @@ class FurnitureController extends Controller
      */
     public function index(Request $request)
     {
-        //人気順か新着順かで並び替え
-        $sort = $request->input('sort');
-        if ($sort === 'newest') {
-            $furnitures = Furniture::orderBy('created_at', 'desc')->get();
-        } elseif ($sort === 'popular') {
-            // 人気順でソートする処理を記述する（例えば売上数や評価などに基づいてソート）
-            $furnitures = Furniture::orderBy('review', 'desc')->get();
-        } else {
-            $furnitures = Furniture::all();
-        }
-
-        //地域で絞り込み
-        $prefectures = $furnitures->pluck('prefecture')->unique();
-        $prefecture = $request->input('prefecture');
-        if ($prefecture !== '全国') {
-            $furnitures = $furnitures->where('prefecture', $prefecture);
-        }
-        //価格帯で絞り込み
-        $minPrice = $request->input('minPrice');
-        $maxPrice = $request->input('maxPrice');
-        if ($minPrice) {
-            $furnitures = $furnitures->where('price', '>=', $minPrice);
-        }
-        if ($maxPrice) {
-            $furnitures = $furnitures->where('price', '<=', $maxPrice);
-        }
-
-        return view('furnitures.index', compact('furnitures', 'prefectures'));
+        $furnitures = Furniture::search($request);
+        return view('furnitures.index', compact('furnitures'));
     }
+
 
 
     /**

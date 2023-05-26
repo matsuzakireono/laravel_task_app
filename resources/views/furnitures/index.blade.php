@@ -1,3 +1,6 @@
+@php
+    use App\Const\Prefecture;
+@endphp
 
 <x-app-layout>
     <!-- index.blade.php -->
@@ -11,10 +14,11 @@
         <div>
             <label for="prefecture">地域:</label>
             <select name="prefecture" id="prefecture">
-                <option value="全国" {{request('prefecture') === '全国' ? 'selected' : '' }}>全国</option>
-                @foreach ($prefectures as $prefecture)
-                    <option value="{{$prefecture}}" {{request('prefecture') === $prefecture ? 'selected' : '' }}>{{$prefecture}}</option>
-                @endforeach
+                    <option value="全国" {{request('prefecture') === '全国' ? 'selected' : '' }}>全国</option>
+                    @for($i = 0; $i < count(Prefecture::LIST); $i++)
+                    <option value="{{ Prefecture::LIST[$i] }}" {{request('prefecture') === Prefecture::LIST[$i] ? 'selected' : '' }}>{{ Prefecture::LIST[$i] }}</option>
+                    @endfor
+
             </select>
         </div>
         <div>
@@ -25,7 +29,6 @@
             </select>
         </div>
         <div>
-            <label for="price">価格帯</label>
             <div>
                 <label for="minPrice">最少額:</label>
                 <input type="number" id="minPrice" name="minPrice" value="{{ request('minPrice') !== null ? request('minPrice') : '' }}">
@@ -34,6 +37,10 @@
                 <label for="maxPrice">最大額:</label>
                 <input type="number" id="maxPrice" name="maxPrice" value="{{ request('maxPrice') !== null ? request('maxPrice') : '' }}">
             </div>
+        </div>
+        <div>
+            <label for="is_visible">在庫があるものだけ表示する</label>
+            <input type="checkbox" name="is_visible" value="is_visible" {{ request('is_visible') == true ? 'checked' : ''}}>
         </div>
 
         <button type="submit">検索</button>
@@ -51,6 +58,7 @@
                     <th>都道府県</th>
                     <th>評価</th>
                     <th>発売日</th>
+                    <th>在庫</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +70,13 @@
                     <td>{{ $furniture->prefecture }}</td>
                     <td>{{ $furniture->review }}</td>
                     <td>{{ $furniture->created_at }}</td>
+                    <td>
+                        @if ($furniture->is_visible)
+                            あり
+                        @else
+                            なし
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
