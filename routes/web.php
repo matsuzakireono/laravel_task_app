@@ -9,6 +9,7 @@ use App\Http\Controllers\SampleController;
 use App\Http\Controllers\FurnitureController;
 use App\Models\Coach;
 use App\Models\Team;
+use App\Models\Player;
 
 
 Route::get('/sample', [SampleController::class, 'index'])->name('sample.index');
@@ -63,6 +64,26 @@ Route::get('/team', function () {
     /* Team モデルを通じて、teams テーブルのデータをすべて取得 */
     $all_teams = Team::all();
     foreach ($all_teams as $team) {
+        /* $team->playersで、関連付けされたteams テーブルのレコードの内容を取得できる */
+        print("<h2>チーム名： {$team->name}</h2>");
+        print("<p>所属プレイヤー</p>");
+        print('<ul>');
+        /* Team モデルとPlayer モデルのリレーションは一対多(hasMany)
+             * 複数データが取得されるため、foreachでループしてひとつずつ処理する
+             */
+        foreach ($team->players as $player) {
+            print("<li>{$player->name}</li>");
+        }
+        print('</ul>');
+    }
+});
+/* Teamのデータを一覧表示する
+ * (表示したいだけなので、Controllerを作らずルータ内で処理する)
+ */
+Route::get('/team_coach', function () {
+    /* Team モデルを通じて、teams テーブルのデータをすべて取得 */
+    $all_teams = Team::all();
+    foreach ($all_teams as $team) {
         /* nullの場合があるので、ifでチェック */
         if ($team->coach != null) {
             $coach = $team->coach->name;
@@ -78,6 +99,34 @@ Route::get('/team', function () {
              */
         foreach ($team->players as $player) {
             print("<li>{$player->name}</li>");
+        }
+        print('</ul>');
+    }
+});
+
+/* ↓以下の内容で上書きする↓ */
+/* Playerのデータを一覧表示する
+ * (表示したいだけなので、Controllerを作らずルータ内で処理する)
+ */
+Route::get('player', function () {
+    /* Player モデルを通じて、players テーブルのデータをすべて取得 */
+    $all_players = Player::all();
+    foreach ($all_players as $player) {
+        /* null の場合があるので、if でチェック */
+        if ($player->team != null) {
+            $team = $player->team->name;
+        } else {
+            $team = '';
+        }
+        print("<h2>プレイヤー名： {$player->name} (所属チーム: {$team})</h2>");
+        print("<p>得意ポジション</p>");
+        print('<ul>');
+        /* $player->positionsで、関連付けされたpositions テーブルのレコードの内容を取得できる
+            * Player モデルとPosition モデルのリレーションは多対多(belongsToMany)
+            * 複数データが取得されるため、foreachでループしてひとつずつ処理する
+            */
+        foreach ($player->positions as $position) {
+            print("<li>{$position->name}</li>");
         }
         print('</ul>');
     }
