@@ -12,8 +12,8 @@ class FurnitureController extends Controller
      */
     public function index(Request $request)
     {
+        //人気順か新着順かで並び替え
         $sort = $request->input('sort');
-
         if ($sort === 'newest') {
             $furnitures = Furniture::orderBy('created_at', 'desc')->get();
         } elseif ($sort === 'popular') {
@@ -22,7 +22,16 @@ class FurnitureController extends Controller
         } else {
             $furnitures = Furniture::all();
         }
-        return view('furnitures.index', compact('furnitures'));
+
+        //地域で絞り込み
+        $prefectures = $furnitures->pluck('prefecture')->unique();
+        $prefecture = $request->input('prefecture');
+        if ($prefecture !== '全国') {
+            $furnitures = $furnitures->where('prefecture', $prefecture);
+        }
+        //価格帯で絞り込み
+
+        return view('furnitures.index', compact('furnitures', 'prefectures'));
     }
 
 
