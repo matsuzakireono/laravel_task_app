@@ -30,6 +30,14 @@ class FurnitureController extends Controller
             $furnitures = $furnitures->where('prefecture', $prefecture);
         }
         //価格帯で絞り込み
+        $minPrice = $request->input('minPrice');
+        $maxPrice = $request->input('maxPrice');
+        if ($minPrice) {
+            $furnitures = $furnitures->where('price', '>=', $minPrice);
+        }
+        if ($maxPrice) {
+            $furnitures = $furnitures->where('price', '<=', $maxPrice);
+        }
 
         return view('furnitures.index', compact('furnitures', 'prefectures'));
     }
