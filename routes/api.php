@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/test/{id}', [TestAPIController::class, 'index']);
 Route::get('/test', [TestAPIController::class, 'getAllContacts']);
+Route::middleware('auth')->group(function () {
+    //タスク管理アプリ
+    Route::resource('tasks', TaskController::class);
+});
