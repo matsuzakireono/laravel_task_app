@@ -7,9 +7,11 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\FurnitureController;
+use App\Http\Controllers\TaskController;
 use App\Models\Coach;
 use App\Models\Team;
 use App\Models\Player;
+use App\Http\Controllers\TeamController;
 
 
 Route::get('/sample', [SampleController::class, 'index'])->name('sample.index');
@@ -40,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
     //ここから家具サイト
     Route::resource('furnitures', FurnitureController::class);
+
+    //タスク管理アプリ
+    Route::resource('tasks', TaskController::class);
 });
 // Route::resource('funitures', FurnitureController::class);
 
@@ -131,3 +136,6 @@ Route::get('player', function () {
         print('</ul>');
     }
 });
+
+Route::get('/team/edit/{id}', [TeamController::class, 'edit']);
+Route::post('/team/edit/{id}', [TeamController::class, 'update']);
