@@ -13,7 +13,20 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('task_content');
+            $table->string('task_name');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->default(null)
+                ->constrained('users');
+            $table->foreignId('category_id')
+                ->nullable()
+                ->default(null)
+                ->constrained('categories');
+            $table->timestamp('deadline')
+                ->nullable()
+                ->default(null);
+            $table->boolean('is_completed')
+                ->default(false);
             $table->timestamps();
         });
     }

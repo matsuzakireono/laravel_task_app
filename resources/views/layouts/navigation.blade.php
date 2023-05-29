@@ -15,8 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('furnitures.index')" :active="request()->routeIs('furnitures.index')">
+                    {{-- <x-nav-link :href="route('furnitures.index')" :active="request()->routeIs('furnitures.index')">
                         {{ __('家具一覧') }}
+                    </x-nav-link> --}}
+                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('furnitures.index')">
+                        {{ __('タスク管理') }}
                     </x-nav-link>
                 </div>
             </div>

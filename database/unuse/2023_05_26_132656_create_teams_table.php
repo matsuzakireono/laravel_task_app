@@ -21,6 +21,7 @@ return new class extends Migration
                 ->constrained('coaches');  // 関連づけるテーブル名を指定する(※先にcoaches テーブルを作成しておく必要がある)
             $table->timestamps();
         });
+
     }
 
     /**

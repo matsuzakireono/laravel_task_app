@@ -20,8 +20,13 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(
             [
-                ContactsSeeder::class,
-                InitializeCoachesAndTeamsSeeder::class
+                // ContactsSeeder::class,
+                // InitializeCoachesAndTeamsSeeder::class
+                UserSeeder::class,
+                TagsSeeder::class,
+                CategoriesSeeder::class,
+                TaskSeeder::class,
+                TagTaskSeeder::class,
             ],
         );
     }

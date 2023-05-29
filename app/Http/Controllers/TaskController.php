@@ -37,7 +37,7 @@ class TaskController extends Controller
         );
 
         $task = new Task;
-        $task->task_content = $request->task_content;
+        $task->task_name = $request->task_name;
         $task->save();
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
